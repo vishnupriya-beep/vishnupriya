@@ -1,1 +1,1629 @@
-<h1>this is version 2 </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberGuard — Next-Gen Security</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #030b12;
+    --bg-secondary: #050f1a;
+    --bg-card: #071622;
+    --bg-panel: #0a1e30;
+    --accent-cyan: #00f5ff;
+    --accent-green: #00ff88;
+    --accent-red: #ff2d4e;
+    --accent-orange: #ff8c00;
+    --accent-purple: #8b5cf6;
+    --text-primary: #e0f7fa;
+    --text-secondary: #6ca8c7;
+    --text-muted: #3a6680;
+    --border-dim: rgba(0, 245, 255, 0.1);
+    --border-glow: rgba(0, 245, 255, 0.35);
+    --grid-line: rgba(0, 245, 255, 0.04);
+    --font-mono: 'Share Tech Mono', monospace;
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── GRID BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4rem;
+    height: 68px;
+    background: rgba(3, 11, 18, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-dim);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--accent-cyan);
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-logo .logo-icon {
+    width: 32px; height: 32px;
+    border: 2px solid var(--accent-cyan);
+    display: grid;
+    place-items: center;
+    position: relative;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: rgba(0,245,255,0.08);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0; height: 1px;
+    background: var(--accent-cyan);
+    transition: width 0.25s;
+  }
+
+  .nav-links a:hover { color: var(--accent-cyan); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 8px 22px;
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    background: transparent;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+
+  .nav-cta:hover {
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+  }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 2rem;
+    padding-top: 68px;
+    overflow: hidden;
+  }
+
+  .hero-scanner {
+    position: absolute;
+    top: 0; left: -100%;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, var(--accent-cyan), transparent);
+    animation: scan 6s linear infinite;
+    opacity: 0.4;
+  }
+
+  @keyframes scan {
+    0%   { left: -2px; opacity: 0; }
+    10%  { opacity: 0.4; }
+    90%  { opacity: 0.4; }
+    100% { left: 101%; opacity: 0; }
+  }
+
+  .hero-badge {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent-green);
+    border: 1px solid rgba(0,255,136,0.3);
+    padding: 5px 16px;
+    letter-spacing: 0.2em;
+    margin-bottom: 2rem;
+    display: inline-block;
+    animation: fadeInDown 0.8s ease both;
+  }
+
+  .hero-badge::before { content: '▶ '; }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    animation: fadeInDown 0.9s 0.1s ease both;
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-title span {
+    color: var(--accent-cyan);
+    position: relative;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 2vw, 1.15rem);
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 1.5rem auto 3rem;
+    animation: fadeInDown 1s 0.2s ease both;
+    line-height: 1.8;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInDown 1s 0.3s ease both;
+  }
+
+  .btn-primary {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 14px 36px;
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    transition: opacity 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+
+  .btn-secondary {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 13px 36px;
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-glow);
+    cursor: pointer;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 4rem;
+    margin-top: 5rem;
+    animation: fadeInDown 1.1s 0.5s ease both;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+  }
+
+  .hero-stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── SECTION COMMON ── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 4rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent-cyan);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-tag::before { content: '// '; opacity: 0.5; }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+  }
+
+  .section-title span { color: var(--accent-cyan); }
+
+  .section-desc {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin: 1rem auto 0;
+    line-height: 1.7;
+  }
+
+  /* ── THREAT TICKER ── */
+  .ticker-wrap {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 45, 78, 0.06);
+    border-top: 1px solid rgba(255,45,78,0.2);
+    border-bottom: 1px solid rgba(255,45,78,0.2);
+    overflow: hidden;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .ticker-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent-red);
+    letter-spacing: 0.15em;
+    background: rgba(255,45,78,0.12);
+    padding: 4px 16px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(255,45,78,0.3);
+    z-index: 2;
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 4rem;
+    animation: ticker 30s linear infinite;
+    padding-left: 3rem;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ticker-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-red);
+    animation: pulse-dot 1.5s ease infinite;
+  }
+
+  .ticker-dot.warn { background: var(--accent-orange); }
+  .ticker-dot.ok   { background: var(--accent-green); }
+
+  @keyframes pulse-dot {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50%     { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--bg-secondary); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: var(--border-dim);
+    border: 1px solid var(--border-dim);
+  }
+
+  .service-card {
+    background: var(--bg-card);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s;
+    cursor: pointer;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--card-accent, var(--accent-cyan));
+    transition: height 0.3s;
+  }
+
+  .service-card:hover { background: var(--bg-panel); }
+  .service-card:hover::before { height: 100%; }
+
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .service-num {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.8rem;
+  }
+
+  .service-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.8rem;
+  }
+
+  .service-desc {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--card-accent, var(--accent-cyan));
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .service-card:hover .service-link { opacity: 1; }
+
+  /* ── THREAT MAP / DASHBOARD ── */
+  #dashboard {
+    background: var(--bg-primary);
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-dim);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-dim);
+  }
+
+  .panel-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent-cyan);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .panel-status {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--accent-green);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .panel-status::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    display: inline-block;
+    animation: pulse-dot 1.5s ease infinite;
+  }
+
+  /* Threat map SVG area */
+  .map-area {
+    padding: 1.5rem;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .world-map {
+    width: 100%;
+    max-width: 700px;
+    height: 280px;
+    position: relative;
+  }
+
+  /* Animated threat pulses on the map */
+  .pulse-point {
+    position: absolute;
+    width: 12px; height: 12px;
+    transform: translate(-50%, -50%);
+  }
+
+  .pulse-point::before,
+  .pulse-point::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--pulse-color, var(--accent-red));
+  }
+
+  .pulse-point::before {
+    opacity: 0.8;
+    width: 8px; height: 8px;
+    top: 2px; left: 2px;
+  }
+
+  .pulse-point::after {
+    animation: ripple var(--dur, 2s) ease-out infinite;
+    background: transparent;
+    border: 1px solid var(--pulse-color, var(--accent-red));
+  }
+
+  @keyframes ripple {
+    0%   { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(3); opacity: 0; }
+  }
+
+  /* Log feed */
+  .log-feed {
+    padding: 12px 0;
+    max-height: 280px;
+    overflow: hidden;
+  }
+
+  .log-entry {
+    display: flex;
+    gap: 10px;
+    padding: 8px 20px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    border-bottom: 1px solid rgba(0,245,255,0.04);
+    animation: slideIn 0.4s ease both;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-8px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .log-time { color: var(--text-muted); flex-shrink: 0; }
+  .log-type { flex-shrink: 0; }
+  .log-type.crit { color: var(--accent-red); }
+  .log-type.warn { color: var(--accent-orange); }
+  .log-type.info { color: var(--accent-cyan); }
+  .log-type.ok   { color: var(--accent-green); }
+  .log-msg { color: var(--text-secondary); }
+
+  /* Stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border-dim);
+  }
+
+  .stat-box {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--stat-color, var(--accent-cyan));
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--stat-color, var(--accent-cyan));
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .stat-unit {
+    font-size: 1rem;
+    opacity: 0.7;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* Threat meter */
+  .meter-panel {
+    padding: 1.5rem 20px;
+  }
+
+  .meter-item {
+    margin-bottom: 1.2rem;
+  }
+
+  .meter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .meter-name {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.08em;
+  }
+
+  .meter-val {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-primary);
+  }
+
+  .meter-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .meter-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--fill-color, var(--accent-cyan));
+    transition: width 1s ease;
+    animation: fillAnim 1.5s ease both;
+  }
+
+  @keyframes fillAnim {
+    from { width: 0 !important; }
+  }
+
+  /* ── FEATURES ── */
+  #features { background: var(--bg-secondary); }
+
+  .features-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .feature-terminal {
+    background: var(--bg-card);
+    border: 1px solid var(--border-dim);
+    font-family: var(--font-mono);
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--border-dim);
+  }
+
+  .t-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .terminal-title {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-left: 6px;
+  }
+
+  .terminal-body {
+    padding: 1.5rem;
+    font-size: 0.78rem;
+    line-height: 2;
+    min-height: 320px;
+  }
+
+  .t-line { display: block; }
+  .t-prompt { color: var(--accent-green); }
+  .t-cmd { color: var(--text-primary); }
+  .t-out  { color: var(--text-secondary); }
+  .t-ok   { color: var(--accent-green); }
+  .t-warn { color: var(--accent-orange); }
+  .t-err  { color: var(--accent-red); }
+  .t-dim  { color: var(--text-muted); }
+  .t-cyan { color: var(--accent-cyan); }
+
+  .cursor {
+    display: inline-block;
+    width: 8px; height: 14px;
+    background: var(--accent-cyan);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .features-list { list-style: none; }
+
+  .feature-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--border-dim);
+  }
+
+  .feature-item:last-child { border-bottom: none; }
+
+  .feature-icon-wrap {
+    width: 44px; height: 44px;
+    flex-shrink: 0;
+    border: 1px solid var(--border-glow);
+    display: grid;
+    place-items: center;
+    font-size: 1.2rem;
+    background: rgba(0,245,255,0.04);
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+
+  .feature-text h4 {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .feature-text p {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ── PRICING ── */
+  #pricing { background: var(--bg-primary); }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border-dim);
+    border: 1px solid var(--border-dim);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .pricing-card {
+    background: var(--bg-card);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .pricing-card.featured {
+    background: var(--bg-panel);
+  }
+
+  .pricing-card.featured::before {
+    content: 'RECOMMENDED';
+    position: absolute;
+    top: -1px; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+    padding: 4px 16px;
+  }
+
+  .pricing-tier {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .pricing-price {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .pricing-price sup {
+    font-size: 1.2rem;
+    vertical-align: super;
+    color: var(--text-secondary);
+  }
+
+  .pricing-period {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    margin-bottom: 2rem;
+    letter-spacing: 0.1em;
+  }
+
+  .pricing-features {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+
+  .pricing-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-dim);
+  }
+
+  .pricing-features li::before {
+    content: '▸';
+    color: var(--accent-cyan);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .pricing-features li.na {
+    opacity: 0.35;
+    text-decoration: line-through;
+  }
+
+  .pricing-features li.na::before {
+    color: var(--text-muted);
+    content: '✕';
+  }
+
+  .btn-pricing {
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 12px;
+    border: 1px solid var(--border-glow);
+    background: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .btn-pricing:hover,
+  .pricing-card.featured .btn-pricing {
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+    border-color: var(--accent-cyan);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-dim);
+    padding: 4rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand p {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-top: 0.8rem;
+    max-width: 280px;
+  }
+
+  .footer-col h5 {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--accent-cyan);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+  }
+
+  .footer-col li {
+    margin-bottom: 0.6rem;
+  }
+
+  .footer-col a {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--accent-cyan); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border-dim);
+    padding-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--accent-green);
+  }
+
+  /* Decorative corner brackets */
+  .bracket {
+    position: absolute;
+    width: 16px; height: 16px;
+    border-color: var(--accent-cyan);
+    border-style: solid;
+    opacity: 0.3;
+  }
+  .bracket.tl { top: 12px; left: 12px; border-width: 1px 0 0 1px; }
+  .bracket.tr { top: 12px; right: 12px; border-width: 1px 1px 0 0; }
+  .bracket.bl { bottom: 12px; left: 12px; border-width: 0 0 1px 1px; }
+  .bracket.br { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 70px 1.5rem; }
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .features-layout { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 580px) {
+    .hero-stats { gap: 2rem; flex-wrap: wrap; }
+    .footer-grid { grid-template-columns: 1fr; }
+    footer { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="logo-icon">⬡</div>
+    CYBERGUARD
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#dashboard">Threat Intel</a></li>
+    <li><a href="#features">Platform</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <a href="#pricing" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-scanner"></div>
+
+  <div class="hero-badge">SYSTEM STATUS: ALL DEFENSES ACTIVE</div>
+
+  <h1 class="hero-title">
+    DEFEND.<br><span>DETECT.</span><br>DOMINATE.
+  </h1>
+
+  <p class="hero-subtitle">
+    Next-generation cybersecurity infrastructure powered by AI-driven threat intelligence.
+    Zero-trust architecture. Real-time response. Unbreachable.
+  </p>
+
+  <div class="hero-btns">
+    <a href="#dashboard" class="btn-primary">View Threat Console</a>
+    <a href="#services" class="btn-secondary">Explore Platform</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">99.98%</div>
+      <div class="hero-stat-label">Uptime SLA</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">4.2B+</div>
+      <div class="hero-stat-label">Threats Blocked</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">&lt;12ms</div>
+      <div class="hero-stat-label">Response Time</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">190+</div>
+      <div class="hero-stat-label">Countries Protected</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <span class="ticker-label">⚠ LIVE THREATS</span>
+  <div class="ticker-track" id="ticker">
+    <span class="ticker-item"><span class="ticker-dot"></span>DDoS Attack detected — Origin: 185.220.101.47 — Target: Financial Sector</span>
+    <span class="ticker-item"><span class="ticker-dot warn"></span>SQL Injection attempt blocked — /api/v2/users endpoint</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Ransomware signature identified — Threat level: CRITICAL</span>
+    <span class="ticker-item"><span class="ticker-dot ok"></span>Zero-day patch deployed — CVE-2026-11248 mitigated</span>
+    <span class="ticker-item"><span class="ticker-dot warn"></span>Brute-force detected — 4,882 attempts in 60s — IP blocked</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>APT Group Lazarus activity — Asia-Pacific nodes under watch</span>
+    <span class="ticker-item"><span class="ticker-dot ok"></span>Phishing campaign neutralized — 23,000 endpoints secured</span>
+    <!-- duplicated for seamless loop -->
+    <span class="ticker-item"><span class="ticker-dot"></span>DDoS Attack detected — Origin: 185.220.101.47 — Target: Financial Sector</span>
+    <span class="ticker-item"><span class="ticker-dot warn"></span>SQL Injection attempt blocked — /api/v2/users endpoint</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Ransomware signature identified — Threat level: CRITICAL</span>
+    <span class="ticker-item"><span class="ticker-dot ok"></span>Zero-day patch deployed — CVE-2026-11248 mitigated</span>
+    <span class="ticker-item"><span class="ticker-dot warn"></span>Brute-force detected — 4,882 attempts in 60s — IP blocked</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>APT Group Lazarus activity — Asia-Pacific nodes under watch</span>
+    <span class="ticker-item"><span class="ticker-dot ok"></span>Phishing campaign neutralized — 23,000 endpoints secured</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header">
+    <div class="section-tag">Core Capabilities</div>
+    <h2 class="section-title">SECURITY<span> SERVICES</span></h2>
+    <p class="section-desc">Enterprise-grade protection across every attack surface — from endpoints to cloud infrastructure.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card" style="--card-accent: #00f5ff;">
+      <span class="service-icon">🛡️</span>
+      <div class="service-num">SVC.01</div>
+      <div class="service-name">THREAT INTELLIGENCE</div>
+      <p class="service-desc">Real-time global threat feeds aggregated from 180,000+ sensors. AI-correlated IOCs with predictive strike mapping.</p>
+      <a href="#" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" style="--card-accent: #00ff88;">
+      <span class="service-icon">🔍</span>
+      <div class="service-num">SVC.02</div>
+      <div class="service-name">ENDPOINT DETECTION</div>
+      <p class="service-desc">Next-gen EDR with behavioral AI. Memory forensics, process injection detection, and lateral movement blocking.</p>
+      <a href="#" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" style="--card-accent: #8b5cf6;">
+      <span class="service-icon">☁️</span>
+      <div class="service-num">SVC.03</div>
+      <div class="service-name">CLOUD SECURITY</div>
+      <p class="service-desc">CSPM + CWPP unified platform. Misconfig detection, runtime protection for containers, and Kubernetes hardening.</p>
+      <a href="#" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" style="--card-accent: #ff8c00;">
+      <span class="service-icon">🔒</span>
+      <div class="service-num">SVC.04</div>
+      <div class="service-name">ZERO TRUST ACCESS</div>
+      <p class="service-desc">Identity-first SASE architecture. Microsegmentation, continuous verification, and encrypted east-west traffic.</p>
+      <a href="#" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" style="--card-accent: #ff2d4e;">
+      <span class="service-icon">⚡</span>
+      <div class="service-num">SVC.05</div>
+      <div class="service-name">INCIDENT RESPONSE</div>
+      <p class="service-desc">24/7 DFIR team. Mean-time-to-contain under 4 hours. Automated playbooks and crisis communication built-in.</p>
+      <a href="#" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" style="--card-accent: #00f5ff;">
+      <span class="service-icon">🧬</span>
+      <div class="service-num">SVC.06</div>
+      <div class="service-name">VULNERABILITY MGMT</div>
+      <p class="service-desc">Continuous attack surface scanning. Risk-based prioritization with CVSS + exploit likelihood scoring.</p>
+      <a href="#" class="service-link">Learn More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard">
+  <div class="section-header">
+    <div class="section-tag">Live Operations</div>
+    <h2 class="section-title">THREAT <span>CONSOLE</span></h2>
+    <p class="section-desc">Global threat intelligence dashboard. Monitoring 4.2B+ events per day across our sensor network.</p>
+  </div>
+
+  <!-- Stats row -->
+  <div class="stats-row" style="border: 1px solid var(--border-dim); margin-bottom: 1.5rem;">
+    <div class="stat-box" style="--stat-color: #ff2d4e;">
+      <div class="stat-value" id="threats-val">1<span class="stat-unit">K</span></div>
+      <div class="stat-label">Active Threats</div>
+    </div>
+    <div class="stat-box" style="--stat-color: #00f5ff;">
+      <div class="stat-value" id="blocked-val">428<span class="stat-unit">M</span></div>
+      <div class="stat-label">Blocked Today</div>
+    </div>
+    <div class="stat-box" style="--stat-color: #00ff88;">
+      <div class="stat-value" id="clean-val">99.98<span class="stat-unit">%</span></div>
+      <div class="stat-label">Clean Traffic</div>
+    </div>
+    <div class="stat-box" style="--stat-color: #ff8c00;">
+      <div class="stat-value" id="resp-val">11<span class="stat-unit">ms</span></div>
+      <div class="stat-label">Avg Response</div>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+
+    <!-- World map panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">// GLOBAL ATTACK MAP</span>
+        <span class="panel-status">LIVE FEED</span>
+      </div>
+      <div class="map-area">
+        <!-- ASCII/SVG World Map representation -->
+        <svg viewBox="0 0 700 300" style="width:100%;height:auto;" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Simplified world landmass shapes -->
+          <defs>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- Grid lines -->
+          <line x1="0" y1="150" x2="700" y2="150" stroke="rgba(0,245,255,0.08)" stroke-width="1"/>
+          <line x1="350" y1="0" x2="350" y2="300" stroke="rgba(0,245,255,0.08)" stroke-width="1"/>
+          <!-- North America -->
+          <path d="M80 60 L160 45 L200 55 L210 80 L195 110 L175 130 L155 145 L130 160 L110 175 L90 170 L75 155 L65 130 L70 100 Z" fill="rgba(0,245,255,0.07)" stroke="rgba(0,245,255,0.25)" stroke-width="0.8"/>
+          <!-- South America -->
+          <path d="M160 175 L190 165 L210 175 L215 200 L205 230 L185 255 L165 260 L150 245 L145 220 L148 195 Z" fill="rgba(0,245,255,0.07)" stroke="rgba(0,245,255,0.25)" stroke-width="0.8"/>
+          <!-- Europe -->
+          <path d="M310 50 L370 45 L380 60 L375 85 L355 95 L335 90 L315 80 L305 65 Z" fill="rgba(0,245,255,0.07)" stroke="rgba(0,245,255,0.25)" stroke-width="0.8"/>
+          <!-- Africa -->
+          <path d="M325 100 L375 95 L395 110 L400 145 L390 185 L370 210 L345 215 L320 200 L310 170 L308 135 L315 110 Z" fill="rgba(0,245,255,0.07)" stroke="rgba(0,245,255,0.25)" stroke-width="0.8"/>
+          <!-- Asia -->
+          <path d="M390 35 L530 30 L570 50 L580 75 L565 100 L530 110 L500 105 L470 95 L440 90 L415 100 L400 85 L385 65 Z" fill="rgba(0,245,255,0.07)" stroke="rgba(0,245,255,0.25)" stroke-width="0.8"/>
+          <!-- Australia -->
+          <path d="M530 175 L590 170 L610 185 L615 215 L600 235 L570 240 L545 230 L530 210 L525 190 Z" fill="rgba(0,245,255,0.07)" stroke="rgba(0,245,255,0.25)" stroke-width="0.8"/>
+
+          <!-- Attack lines -->
+          <line x1="195" y1="100" x2="470" y2="70" stroke="rgba(255,45,78,0.5)" stroke-width="1" stroke-dasharray="4 3">
+            <animate attributeName="stroke-dashoffset" values="0;-100" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <line x1="490" y1="65" x2="340" y2="70" stroke="rgba(255,140,0,0.4)" stroke-width="1" stroke-dasharray="4 3">
+            <animate attributeName="stroke-dashoffset" values="0;-100" dur="2.5s" repeatCount="indefinite"/>
+          </line>
+          <line x1="350" y1="70" x2="170" y2="110" stroke="rgba(255,45,78,0.35)" stroke-width="1" stroke-dasharray="4 3">
+            <animate attributeName="stroke-dashoffset" values="0;-100" dur="3s" repeatCount="indefinite"/>
+          </line>
+
+          <!-- Attack origin pulses -->
+          <circle cx="195" cy="100" r="4" fill="rgba(255,45,78,0.9)" filter="url(#glow)">
+            <animate attributeName="r" values="4;10;4" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="490" cy="65" r="4" fill="rgba(255,45,78,0.9)" filter="url(#glow)">
+            <animate attributeName="r" values="4;9;4" dur="1.8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="555" cy="55" r="3" fill="rgba(255,140,0,0.9)">
+            <animate attributeName="r" values="3;7;3" dur="2.2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- Protected nodes (green) -->
+          <circle cx="340" cy="68" r="5" fill="rgba(0,255,136,0.9)" filter="url(#glow)">
+            <animate attributeName="r" values="5;9;5" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.4;1" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="170" cy="108" r="5" fill="rgba(0,255,136,0.9)" filter="url(#glow)">
+            <animate attributeName="r" values="5;8;5" dur="2.7s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.4;1" dur="2.7s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- Legend -->
+          <circle cx="20" cy="270" r="4" fill="rgba(255,45,78,0.9)"/>
+          <text x="30" y="274" fill="rgba(100,168,199,0.8)" font-family="'Share Tech Mono'" font-size="9">ATTACK ORIGIN</text>
+          <circle cx="150" cy="270" r="4" fill="rgba(0,255,136,0.9)"/>
+          <text x="160" y="274" fill="rgba(100,168,199,0.8)" font-family="'Share Tech Mono'" font-size="9">PROTECTED NODE</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+      <!-- Threat levels -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">// THREAT LEVELS</span>
+          <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted)">UPDATED: NOW</span>
+        </div>
+        <div class="meter-panel">
+          <div class="meter-item">
+            <div class="meter-header">
+              <span class="meter-name">RANSOMWARE</span>
+              <span class="meter-val" style="color:var(--accent-red)">CRITICAL 87%</span>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" style="--fill-color:#ff2d4e;width:87%;"></div></div>
+          </div>
+          <div class="meter-item">
+            <div class="meter-header">
+              <span class="meter-name">PHISHING</span>
+              <span class="meter-val" style="color:var(--accent-orange)">HIGH 74%</span>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" style="--fill-color:#ff8c00;width:74%;"></div></div>
+          </div>
+          <div class="meter-item">
+            <div class="meter-header">
+              <span class="meter-name">DDOS</span>
+              <span class="meter-val" style="color:var(--accent-orange)">MEDIUM 51%</span>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" style="--fill-color:#ff8c00;width:51%;"></div></div>
+          </div>
+          <div class="meter-item">
+            <div class="meter-header">
+              <span class="meter-name">ZERO-DAYS</span>
+              <span class="meter-val" style="color:var(--accent-cyan)">LOW 23%</span>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" style="--fill-color:#00f5ff;width:23%;"></div></div>
+          </div>
+          <div class="meter-item" style="margin-bottom:0;">
+            <div class="meter-header">
+              <span class="meter-name">INSIDER THREATS</span>
+              <span class="meter-val" style="color:var(--accent-green)">MINIMAL 12%</span>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" style="--fill-color:#00ff88;width:12%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live event log -->
+      <div class="panel" style="flex:1;">
+        <div class="panel-header">
+          <span class="panel-title">// EVENT LOG</span>
+          <span class="panel-status">STREAMING</span>
+        </div>
+        <div class="log-feed" id="log-feed">
+          <div class="log-entry">
+            <span class="log-time">14:22:01</span>
+            <span class="log-type crit">[CRIT]</span>
+            <span class="log-msg">Ransomware blocked: WannaCry variant</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-time">14:21:58</span>
+            <span class="log-type ok">[OK]</span>
+            <span class="log-msg">Patch deployed: CVE-2026-1184</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-time">14:21:44</span>
+            <span class="log-type warn">[WARN]</span>
+            <span class="log-msg">Anomalous traffic: node 10.0.14.22</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-time">14:21:30</span>
+            <span class="log-type info">[INFO]</span>
+            <span class="log-msg">Signature DB updated: +4,821 entries</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-time">14:21:17</span>
+            <span class="log-type crit">[CRIT]</span>
+            <span class="log-msg">SQL injection: origin 91.108.4.172</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-time">14:21:02</span>
+            <span class="log-type ok">[OK]</span>
+            <span class="log-msg">Endpoint hardened: APAC cluster 7</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-header">
+    <div class="section-tag">Platform</div>
+    <h2 class="section-title">BUILT FOR THE <span>FRONTLINE</span></h2>
+    <p class="section-desc">Every layer of the CyberGuard platform is engineered for performance under adversarial conditions.</p>
+  </div>
+
+  <div class="features-layout">
+
+    <div class="feature-terminal">
+      <div class="terminal-bar">
+        <div class="t-dot" style="background:#ff2d4e;"></div>
+        <div class="t-dot" style="background:#ff8c00;"></div>
+        <div class="t-dot" style="background:#00ff88;"></div>
+        <span class="terminal-title">cyberguard@sentinel-node:~$</span>
+      </div>
+      <div class="terminal-body">
+        <span class="t-line"><span class="t-prompt">❯ </span><span class="t-cmd">cyberguard scan --target network --depth deep</span></span>
+        <span class="t-line t-dim">Initializing deep scan protocol...</span>
+        <span class="t-line t-dim">Loading threat signatures: <span class="t-ok">✓ 4,821,003 rules loaded</span></span>
+        <span class="t-line">&nbsp;</span>
+        <span class="t-line t-cyan">── SCAN RESULTS ─────────────────────</span>
+        <span class="t-line"><span class="t-ok">✓</span> <span class="t-out">Endpoints scanned: <strong>8,412</strong></span></span>
+        <span class="t-line"><span class="t-warn">⚠</span> <span class="t-out">Vulnerabilities found: <strong>3</strong> (low severity)</span></span>
+        <span class="t-line"><span class="t-err">✕</span> <span class="t-out">Critical issues: <strong>0</strong></span></span>
+        <span class="t-line"><span class="t-ok">✓</span> <span class="t-out">Firewall status: <strong>OPTIMAL</strong></span></span>
+        <span class="t-line"><span class="t-ok">✓</span> <span class="t-out">Encryption coverage: <strong>100%</strong></span></span>
+        <span class="t-line">&nbsp;</span>
+        <span class="t-line t-cyan">── AI THREAT PREDICTION ──────────────</span>
+        <span class="t-line t-out">Probability of attack in 24h: <span class="t-warn">34%</span></span>
+        <span class="t-line t-out">Recommended action: <span class="t-ok">HARDEN AUTH</span></span>
+        <span class="t-line">&nbsp;</span>
+        <span class="t-line"><span class="t-prompt">❯ </span><span class="cursor"></span></span>
+      </div>
+    </div>
+
+    <ul class="features-list">
+      <li class="feature-item">
+        <div class="feature-icon-wrap">🧠</div>
+        <div class="feature-text">
+          <h4>AI THREAT ENGINE</h4>
+          <p>Machine learning models trained on 10 years of attack data. Identifies novel attack patterns 400ms before execution.</p>
+        </div>
+      </li>
+      <li class="feature-item">
+        <div class="feature-icon-wrap">⚡</div>
+        <div class="feature-text">
+          <h4>AUTONOMOUS RESPONSE</h4>
+          <p>SOAR integration with 200+ pre-built playbooks. Automatically isolate, contain, and remediate without human latency.</p>
+        </div>
+      </li>
+      <li class="feature-item">
+        <div class="feature-icon-wrap">🌐</div>
+        <div class="feature-text">
+          <h4>GLOBAL SENSOR MESH</h4>
+          <p>180,000+ honeypots and passive sensors across 190 countries. First-mover intelligence on every emerging threat.</p>
+        </div>
+      </li>
+      <li class="feature-item">
+        <div class="feature-icon-wrap">🔐</div>
+        <div class="feature-text">
+          <h4>QUANTUM-SAFE CRYPTO</h4>
+          <p>Post-quantum cryptography built into every communication layer. Future-proofed against Q-day scenarios.</p>
+        </div>
+      </li>
+      <li class="feature-item">
+        <div class="feature-icon-wrap">📊</div>
+        <div class="feature-text">
+          <h4>COMPLIANCE AUTOMATION</h4>
+          <p>Continuous compliance monitoring for SOC2, ISO 27001, GDPR, HIPAA, and PCI-DSS with one-click audit reports.</p>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-header">
+    <div class="section-tag">Plans</div>
+    <h2 class="section-title">CHOOSE YOUR <span>SHIELD</span></h2>
+    <p class="section-desc">Scalable pricing for teams of all sizes. No hidden costs. Cancel anytime.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <!-- Starter -->
+    <div class="pricing-card">
+      <div class="bracket tl"></div><div class="bracket tr"></div><div class="bracket bl"></div><div class="bracket br"></div>
+      <div class="pricing-tier">SENTINEL</div>
+      <div class="pricing-price"><sup>$</sup>49</div>
+      <div class="pricing-period">/ MONTH · UP TO 25 USERS</div>
+      <ul class="pricing-features">
+        <li>Endpoint Detection & Response</li>
+        <li>Basic Threat Intelligence</li>
+        <li>Email & Phishing Protection</li>
+        <li>SIEM Integration</li>
+        <li>Community Support</li>
+        <li class="na">AI Threat Prediction</li>
+        <li class="na">Incident Response Team</li>
+        <li class="na">Quantum-Safe Encryption</li>
+      </ul>
+      <button class="btn-pricing">Deploy Sentinel</button>
+    </div>
+
+    <!-- Pro (featured) -->
+    <div class="pricing-card featured">
+      <div class="bracket tl"></div><div class="bracket tr"></div><div class="bracket bl"></div><div class="bracket br"></div>
+      <div class="pricing-tier">GUARDIAN PRO</div>
+      <div class="pricing-price"><sup>$</sup>199</div>
+      <div class="pricing-period">/ MONTH · UP TO 250 USERS</div>
+      <ul class="pricing-features">
+        <li>All Sentinel Features</li>
+        <li>AI Threat Prediction Engine</li>
+        <li>Cloud Security Posture Mgmt</li>
+        <li>Zero Trust Architecture</li>
+        <li>SOAR Automation (50 playbooks)</li>
+        <li>24/7 Priority Support</li>
+        <li>Compliance Dashboard</li>
+        <li class="na">Dedicated IR Team</li>
+      </ul>
+      <button class="btn-pricing">Deploy Guardian</button>
+    </div>
+
+    <!-- Enterprise -->
+    <div class="pricing-card">
+      <div class="bracket tl"></div><div class="bracket tr"></div><div class="bracket bl"></div><div class="bracket br"></div>
+      <div class="pricing-tier">FORTRESS</div>
+      <div class="pricing-price" style="font-size:2rem;">CUSTOM</div>
+      <div class="pricing-period">ENTERPRISE · UNLIMITED SCALE</div>
+      <ul class="pricing-features">
+        <li>All Guardian Pro Features</li>
+        <li>Dedicated IR Response Team</li>
+        <li>Quantum-Safe Encryption</li>
+        <li>Custom Threat Intelligence</li>
+        <li>Air-Gap Deployment Option</li>
+        <li>Red Team Exercises</li>
+        <li>Executive Risk Reports</li>
+        <li>SLA-Backed 99.99% Uptime</li>
+      </ul>
+      <button class="btn-pricing">Contact Sales</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="nav-logo" href="#" style="font-size:1rem;">
+        <div class="logo-icon" style="width:28px;height:28px;">⬡</div>
+        CYBERGUARD
+      </a>
+      <p>The last line of defence between your infrastructure and the adversaries that never stop. Protecting enterprises since 2018.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Platform</h5>
+      <ul>
+        <li><a href="#">Threat Intelligence</a></li>
+        <li><a href="#">Endpoint Security</a></li>
+        <li><a href="#">Cloud Security</a></li>
+        <li><a href="#">Zero Trust</a></li>
+        <li><a href="#">Compliance</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Research Blog</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Partners</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Security Disclosures</a></li>
+        <li><a href="#">SLA</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 CYBERGUARD INC. ALL SYSTEMS OPERATIONAL. ALL RIGHTS RESERVED.</span>
+    <span class="footer-status">
+      ALL SYSTEMS NOMINAL
+    </span>
+  </div>
+</footer>
+
+<script>
+  // Animated counter for hero stats (already set via CSS, but enhance with JS)
+  const logs = [
+    { t:'crit', msg:'Port scan detected: 0.0.0.0/0 sweep' },
+    { t:'ok',   msg:'Firewall rule updated: block 185.220.0.0/16' },
+    { t:'warn', msg:'Suspicious DNS query: exfil.darknet.io' },
+    { t:'info', msg:'New sensor online: EU-WEST-7' },
+    { t:'crit', msg:'Credential stuffing: 9,120 attempts blocked' },
+    { t:'ok',   msg:'TLS certificate renewed: *.cyberguard.io' },
+    { t:'warn', msg:'Outbound anomaly: 890 MB to unknown host' },
+    { t:'info', msg:'Vulnerability scan complete: 0 critical found' },
+  ];
+
+  let logIdx = 0;
+  const feed = document.getElementById('log-feed');
+
+  function addLog() {
+    const entry = logs[logIdx % logs.length];
+    logIdx++;
+    const now = new Date();
+    const time = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+    const el = document.createElement('div');
+    el.className = 'log-entry';
+    el.innerHTML = `<span class="log-time">${time}</span><span class="log-type ${entry.t}">[${entry.t.toUpperCase()}]</span><span class="log-msg">${entry.msg}</span>`;
+    feed.prepend(el);
+    if (feed.children.length > 8) feed.lastChild.remove();
+  }
+
+  setInterval(addLog, 2800);
+
+  // Animate stats counter on scroll into view
+  const statsSection = document.getElementById('dashboard');
+  let animated = false;
+
+  function animateCounter(el, target, suffix, duration) {
+    let start = 0;
+    const step = target / (duration / 30);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.innerHTML = Math.round(start) + '<span class="stat-unit">' + suffix + '</span>';
+    }, 30);
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !animated) {
+        animated = true;
+        setTimeout(() => animateCounter(document.getElementById('threats-val'), 1284, '', 1200), 100);
+        setTimeout(() => animateCounter(document.getElementById('blocked-val'), 428, 'M', 1400), 200);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(statsSection);
+</script>
+</body>
+</html>
